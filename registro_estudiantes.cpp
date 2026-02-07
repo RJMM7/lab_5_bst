@@ -121,7 +121,16 @@ void mostrarAprobados(Estudiante *raiz)
 // 5. Mostrar estudiantes reprobados (nota < 6.0)
 void mostrarReprobados(Estudiante *raiz)
 {
-    // Tu código aquí
+    if(raiz != nullptr){
+        mostrarReprobados(raiz->izquierdo);
+
+        if(raiz->nota <6 ){
+            cout << "Carnet: " << raiz->carnet 
+            << ", nombre: " << raiz->nombre
+            << ", nota: " << raiz->nota << '\n';
+        }
+        mostrarReprobados(raiz->derecho);
+    }
 }
 
 // 6. Calcular el promedio de todas las notas
