@@ -69,7 +69,7 @@ void mostrarEstudiantes(Estudiante *raiz)
         mostrarEstudiantes(raiz->izquierdo);
         cout << "Carnet: " << raiz->carnet
              << ", Nombre: " << raiz->nombre
-             << ", Nota: " << raiz->nota;
+             << ", Nota: " << raiz->nota << endl;
         mostrarEstudiantes(raiz->derecho);
     }
 }
@@ -77,7 +77,26 @@ void mostrarEstudiantes(Estudiante *raiz)
 // 3. Buscar un estudiante por carnet y mostrar sus datos
 void buscarEstudiante(Estudiante *raiz, int carnet)
 {
-    // Tu código aquí
+    if (raiz == NULL)
+    {
+        cout << "Estudiante no encontrado" << endl;
+        return;
+    }
+
+    if (carnet == raiz->carnet)
+    {
+        cout << "Carnet: " << raiz->carnet
+             << ", Nombre: " << raiz->nombre
+             << ", Nota: " << raiz->nota << endl;
+    }
+    else if (carnet < raiz->carnet)
+    {
+        buscarEstudiante(raiz->izquierdo, carnet);
+    }
+    else
+    {
+        buscarEstudiante(raiz->derecho, carnet);
+    }
 }
 
 // 4. Mostrar estudiantes aprobados (nota >= 6.0)
@@ -147,6 +166,12 @@ int main()
             break;
 
         case 3:
+            int carnet;
+
+            cout << "Digite el carnet: ";
+            cin >> carnet;
+
+            buscarEstudiante(sistema, carnet);
             break;
 
         case 4:
