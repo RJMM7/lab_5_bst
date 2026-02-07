@@ -41,22 +41,37 @@ Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
         return crearEstudiante(carnet, nombre, nota);
     }
 
-    if(carnet < raiz->carnet) {
+    if (carnet < raiz->carnet)
+    {
         raiz->izquierdo = insertar(raiz->izquierdo, carnet, nombre, nota);
-    } else if(carnet > raiz->carnet) {
+    }
+    else if (carnet > raiz->carnet)
+    {
         raiz->derecho = insertar(raiz->derecho, carnet, nombre, nota);
-    } else {
+    }
+    else
+    {
         cout << "El carnet ya existe" << endl;
     }
 
     return raiz;
-    
 }
 
 // 2. Mostrar todos los estudiantes en orden de carnet
 void mostrarEstudiantes(Estudiante *raiz)
 {
-    // Tu código aquí
+    if (raiz == NULL)
+    {
+        cout << "No hay estudiantes registrados" << endl;
+    }
+    else
+    {
+        mostrarEstudiantes(raiz->izquierdo);
+        cout << "Carnet: " << raiz->carnet
+             << ", Nombre: " << raiz->nombre
+             << ", Nota: " << raiz->nota;
+        mostrarEstudiantes(raiz->derecho);
+    }
 }
 
 // 3. Buscar un estudiante por carnet y mostrar sus datos
@@ -128,6 +143,7 @@ int main()
             break;
 
         case 2:
+            mostrarEstudiantes(sistema);
             break;
 
         case 3:
@@ -148,7 +164,7 @@ int main()
         case 8:
             cout << "Saliendo del programa..." << endl;
             break;
-        
+
         default:
             cout << "Opcion no valida" << endl;
             break;
