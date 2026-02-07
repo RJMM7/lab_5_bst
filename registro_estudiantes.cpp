@@ -60,11 +60,7 @@ Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
 // 2. Mostrar todos los estudiantes en orden de carnet
 void mostrarEstudiantes(Estudiante *raiz)
 {
-    if (raiz == NULL)
-    {
-        cout << "No hay estudiantes registrados" << endl;
-    }
-    else
+    if (raiz != NULL)
     {
         mostrarEstudiantes(raiz->izquierdo);
         cout << "Carnet: " << raiz->carnet
