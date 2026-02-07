@@ -121,7 +121,7 @@ void mostrarAprobados(Estudiante *raiz)
 // 5. Mostrar estudiantes reprobados (nota < 6.0)
 void mostrarReprobados(Estudiante *raiz)
 {
-    if(raiz != nullptr){
+    if(raiz != NULL){
         mostrarReprobados(raiz->izquierdo);
 
         if(raiz->nota <6 ){
@@ -136,7 +136,7 @@ void mostrarReprobados(Estudiante *raiz)
 // 6. Calcular el promedio de todas las notas
 float calcularPromedio(Estudiante *raiz, int *contador)
 {
-    if(raiz != nullptr)
+    if(raiz !=NULL)
         return 0;
     
         float sumaIzq = calcularPromedio(raiz->izquierdo, contador);
@@ -151,7 +151,22 @@ float calcularPromedio(Estudiante *raiz, int *contador)
 // 7. Encontrar al estudiante con la nota más alta
 Estudiante *encontrarMejorNota(Estudiante *raiz)
 {
-    // Tu código aquí
+    if(raiz !=NULL) 
+        return NULL;
+
+        Estudiante* mejor = raiz;
+
+        Estudiante *mejorIzq = encontrarMejorNota(raiz->izquierdo);
+        Estudiante *mejorDer = encontrarMejorNota(raiz->derecho);
+
+        if(mejorIzq != NULL && mejorIzq->nota > mejor->nota)
+        mejor = mejorIzq;
+
+        if(mejorDer != NULL && mejorDer->nota > mejor->nota )
+        mejor = mejorDer;
+
+    return mejor;
+    
 }
 
 int main()
@@ -209,12 +224,30 @@ int main()
             break;
 
         case 5:
+            if(sistema == NULL) cout << "No hay estudiantes. \n";
+            else mostrarReprobados(sistema);
             break;
 
         case 6:
+            if(sistema == NULL ) {
+                cout << "No hay estudiantes para calcular el promedio. \n";
+            } else {
+                int contador = 0;
+                float suma = calcularPromedio(sistema, &contador);
+                float promedio = (contador > 0) ? (suma/contador) : 0;
+                cout<< "Promedio general: " << promedio << "(" << contador << " estudiantes) \n";
+            }
             break;
 
         case 7:
+            Estudiante *mejor = encontrarMejorNota(sistema);
+            if(mejor == NULL){
+                cout << "No hay estudiantes. \n";
+            } else {
+                cout << "Mejor estudiante: " << mejor->carnet
+                     << ", nombre: " << mejor->nombre
+                     << ", nota: " << mejor->nota << endl;
+            }
             break;
 
         case 8:
