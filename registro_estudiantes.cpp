@@ -136,7 +136,15 @@ void mostrarReprobados(Estudiante *raiz)
 // 6. Calcular el promedio de todas las notas
 float calcularPromedio(Estudiante *raiz, int *contador)
 {
-    // Tu código aquí
+    if(raiz != nullptr)
+        return 0;
+    
+        float sumaIzq = calcularPromedio(raiz->izquierdo, contador);
+        float sumaDer = calcularPromedio(raiz->derecho, contador);
+
+        (*contador)++;
+
+        return sumaIzq + raiz->nota + sumaDer;
     // Usa el contador para saber cuántos estudiantes hay
 }
 
