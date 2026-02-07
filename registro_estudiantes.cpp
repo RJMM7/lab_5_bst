@@ -94,6 +94,9 @@ int main()
 {
     Estudiante *sistema = NULL;
     int opcion;
+    int carnet;
+    char nombre[50];
+    float nota;
 
     do
     {
@@ -109,7 +112,47 @@ int main()
         cout << "Opcion: ";
         cin >> opcion;
 
-        // Implementa el switch con las opciones
+        switch (opcion)
+        {
+        case 1:
+            cout << "Digite el carnet: ";
+            cin >> carnet;
+
+            cout << "Digite el nombre: ";
+            cin >> nombre;
+
+            cout << "Digite la nota: ";
+            cin >> nota;
+
+            sistema = insertar(sistema, carnet, nombre, nota);
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            break;
+
+        case 5:
+            break;
+
+        case 6:
+            break;
+
+        case 7:
+            break;
+
+        case 8:
+            cout << "Saliendo del programa..." << endl;
+            break;
+        
+        default:
+            cout << "Opcion no valida" << endl;
+            break;
+        }
 
     } while (opcion != 8);
 
