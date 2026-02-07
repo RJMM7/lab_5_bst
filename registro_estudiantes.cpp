@@ -36,11 +36,13 @@ Estudiante *crearEstudiante(int carnet, char nom[], float nota)
 // 1. Insertar un estudiante en el árbol (ordenado por carnet)
 Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
 {
+    // Si la lista esta vacia, se agrega un nuevo estudiante
     if (raiz == NULL)
     {
         return crearEstudiante(carnet, nombre, nota);
     }
 
+    // Cosas para ver si se va al lado izquierdo o derecho
     if (carnet < raiz->carnet)
     {
         raiz->izquierdo = insertar(raiz->izquierdo, carnet, nombre, nota);
@@ -60,6 +62,7 @@ Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
 // 2. Mostrar todos los estudiantes en orden de carnet
 void mostrarEstudiantes(Estudiante *raiz)
 {
+    // Verifica si la raiz es dintinto del vacio
     if (raiz != NULL)
     {
         mostrarEstudiantes(raiz->izquierdo);
@@ -73,12 +76,14 @@ void mostrarEstudiantes(Estudiante *raiz)
 // 3. Buscar un estudiante por carnet y mostrar sus datos
 void buscarEstudiante(Estudiante *raiz, int carnet)
 {
+    // Verifica si la raiz es vacia
     if (raiz == NULL)
     {
         cout << "Estudiante no encontrado" << endl;
         return;
     }
 
+    // Verifica si el carnet coincide
     if (carnet == raiz->carnet)
     {
         cout << "Carnet: " << raiz->carnet
@@ -98,7 +103,19 @@ void buscarEstudiante(Estudiante *raiz, int carnet)
 // 4. Mostrar estudiantes aprobados (nota >= 6.0)
 void mostrarAprobados(Estudiante *raiz)
 {
-    // Tu código aquí
+    // Verifica si la raiz es distinta del vacio
+    if(raiz != NULL)
+    {
+        mostrarAprobados(raiz->izquierdo);
+
+        if(raiz->nota >= 6)
+        {
+            cout << "Carnet: " << raiz->carnet
+                 << ", Nombre: " << raiz->nombre
+                 << ", Nota: " << raiz->nota << endl;
+        }
+        mostrarAprobados(raiz->derecho);
+    }
 }
 
 // 5. Mostrar estudiantes reprobados (nota < 6.0)
@@ -171,6 +188,7 @@ int main()
             break;
 
         case 4:
+            mostrarAprobados(sistema);
             break;
 
         case 5:
